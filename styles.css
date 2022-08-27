@@ -13,6 +13,13 @@ body {
   color: #151515;
 }
 
+button {
+  display: flex;
+  font-family: "Open Sans", sans-serif;
+  justify-content: center;
+  align-items: center;
+}
+
 h1,
 h2,
 h3,
@@ -44,7 +51,7 @@ p {
 }
 
 .main_wrapper {
-  width: 100%;
+  width: 100vw;
   height: 100vh;
 }
 
@@ -88,23 +95,6 @@ p {
   list-style-type: none;
 }
 
-@media (min-width: 640px) {
-  .hero_section nav {
-    height: auto;
-  }
-
-  .hero_section ul {
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .hero_nav img {
-    width: 90%;
-    max-width: 80%;
-    margin-top: -10%;
-  }
-}
-
 .hero_sponsors_section {
   display: flex;
   flex: 1;
@@ -141,7 +131,45 @@ p {
   aspect-ratio: auto;
 }
 
+#parent_portal {
+  padding: 0.5rem 0.7rem;
+  background-color: #ff9900;
+  border-radius: 0.5rem;
+  border: none;
+  gap: 1rem;
+  transition: 0.2s ease;
+  white-space: nowrap;
+}
+
+#parent_portal:hover {
+  cursor: pointer;
+  background-color: #fdaf29;
+}
+
+#parent_portal:focus {
+  box-shadow: 2px 0 0 0 2px #ffc45e;
+}
+
+#parent_portal:active {
+  background-color: #ffc45e;
+}
+
 @media (min-width: 640px) {
+  .hero_section nav {
+    height: auto;
+  }
+
+  .hero_section ul {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .hero_nav img {
+    width: 90%;
+    max-width: 80%;
+    margin-top: -10%;
+  }
+
   .hero_sponsors_container {
     height: 50%;
     flex-direction: row;
@@ -166,6 +194,20 @@ p {
   align-items: center;
   padding: 5rem 12vw;
   gap: 3rem;
+}
+
+.about_section h1 {
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .about_section {
+    flex-direction: row;
+  }
+
+  .about_section h1 {
+    text-align: start;
+  }
 }
 
 /* Coaching Staff Section */
@@ -211,6 +253,18 @@ p {
   background-color: #ff9900;
 }
 
+@media (min-width: 1280px) {
+  .about_staff_section h1 {
+    text-align: inherit;
+  }
+  .about_staff_container {
+    flex-direction: row;
+  }
+  .about_staff_section {
+    padding: 5rem 18vw;
+  }
+}
+
 /* Thank Sponsors Section */
 /* ===================== */
 
@@ -249,52 +303,27 @@ p {
   width: 100%;
   justify-content: space-around;
   align-items: center;
-  flex-direction: row;
+  flex-direction: column;
   max-width: 650px;
+  gap: 3rem;
 }
 
 @media (min-width: 640px) {
-  .hero_sponsors_container {
-    height: 50%;
-    flex-direction: row;
-  }
-
-  .hero_sponsors_container img {
-    max-height: 20%;
-    aspect-ratio: auto;
-  }
-
-  .about_section {
-    flex-direction: row;
-  }
-
-  .about_staff_section {
-    padding: 5rem 18vw;
-  }
-
-  .about_staff_section h1 {
-    text-align: inherit;
-  }
-
   .thank_sponsors_section #footer_image {
     position: absolute;
     width: 100%;
     max-width: 100%;
     z-index: -1;
   }
+
+  .thank_sponsors {
+    flex-direction: row;
+  }
 }
 
 @media (min-width: 1280px) {
-  .about_staff_container {
-    flex-direction: row;
-  }
-
   .thank_sponsors_section #footer_image {
     height: auto;
-  }
-
-  .about_staff_section {
-    padding: 5rem 18vw;
   }
 }
 
@@ -309,7 +338,12 @@ p {
   padding: 6rem 0;
 }
 .stay_updated_container {
+  min-width: 27rem;
   background-color: #151515;
+}
+
+.stay_updated_container h1 {
+  margin: 2rem 2rem;
 }
 .stay_updated_container form {
   display: flex;
@@ -318,12 +352,14 @@ p {
 }
 .stay_updated_container input {
   font-family: "Open Sans", sans-serif;
-  height: 2rem;
+  height: 3rem;
 }
 
 .stay_updated_container input[type="submit"] {
+  height: 3rem;
   background-color: #ff9900;
   color: #151515;
+  margin-top: 2rem;
   font-weight: bold;
   text-decoration: none;
   border: none;
