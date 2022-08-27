@@ -48,6 +48,9 @@ p {
   height: 100vh;
 }
 
+/* Hero Section */
+/* ============= */
+
 .hero_section {
   display: flex;
   flex-direction: column;
@@ -150,6 +153,9 @@ p {
   }
 }
 
+/* About Sections */
+/* ============= */
+
 .about_section {
   position: relative;
   color: #f5f5f5;
@@ -162,7 +168,8 @@ p {
   gap: 3rem;
 }
 
-/* ============================ */
+/* Coaching Staff Section */
+/* ===================== */
 
 .about_staff_section {
   position: relative;
@@ -203,6 +210,9 @@ p {
   height: 1px;
   background-color: #ff9900;
 }
+
+/* Thank Sponsors Section */
+/* ===================== */
 
 .thank_sponsors_section {
   position: relative;
@@ -258,12 +268,8 @@ p {
     flex-direction: row;
   }
 
-  .about_staff_container {
-    flex-direction: row;
-  }
-
   .about_staff_section {
-    padding: 5rem 12vw;
+    padding: 5rem 18vw;
   }
 
   .about_staff_section h1 {
@@ -277,6 +283,23 @@ p {
     z-index: -1;
   }
 }
+
+@media (min-width: 1280px) {
+  .about_staff_container {
+    flex-direction: row;
+  }
+
+  .thank_sponsors_section #footer_image {
+    height: auto;
+  }
+
+  .about_staff_section {
+    padding: 5rem 18vw;
+  }
+}
+
+/* Form Subscribe Section */
+/* ===================== */
 
 .stay_updated_section {
   display: flex;
