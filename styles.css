@@ -1,3 +1,8 @@
+:root {
+  --orange-default: #ff9900;
+  --orange-hover: #ffa927;
+}
+
 html {
   min-width: 100vw;
   overflow-x: hidden;
@@ -6,7 +11,6 @@ html {
 body {
   font-family: sans-serif;
   margin: 0px;
-  overflow-x: hidden;
   min-width: 100vw;
   font-family: "Open Sans", sans-serif;
   font-weight: 300;
@@ -32,12 +36,12 @@ h6 {
 h1 {
   flex: 4;
   font-size: 3rem;
-  color: #ff9900;
+  color: var(--orange-default);
   font-weight: bold;
 }
 
 h2 {
-  color: #ff9900;
+  color: var(--orange-default);
   font-size: 2rem;
 }
 
@@ -53,6 +57,162 @@ p {
 .main_wrapper {
   width: 100vw;
   height: 100vh;
+}
+
+/* Modal */
+/* ============= */
+
+.modal_wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal_container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 90%;
+  width: 90%;
+  background-color: #f5f5f5;
+  box-sizing: border-box;
+}
+
+.modal_container img {
+  position: absolute;
+  top: 2rem;
+  align-self: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modal_container img:hover {
+  transform: scale(1.1);
+}
+
+.modal_content {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem;
+  padding: 4rem 0;
+  text-align: center;
+  gap: 2rem;
+}
+
+.modal_container form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.modal_container input {
+  font-family: "Open Sans", sans-serif;
+  height: 3rem;
+  border: 2px solid gray;
+  font-size: 1rem;
+  padding: 0 0.5rem;
+}
+
+.modal_container input[type="submit"] {
+  height: 3rem;
+  background-color: var(--orange-default);
+  color: #151515;
+  font-weight: bold;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal_container input[type="submit"]:hover {
+  background-color: var(--orange-hover);
+}
+
+@media (min-width: 1024px) {
+  .modal_container {
+    max-width: 45%;
+    width: 45%;
+  }
+
+  .modal_content {
+    margin: 2rem 6rem;
+    padding: 4rem 10%;
+  }
+
+  .modal_container img {
+    left: 2rem;
+  }
+}
+
+/* Modal Animations*/
+/* ============= */
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(-5%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-5%);
+  }
+}
+
+.modal_default {
+  opacity: 0;
+  animation: fadeIn 0.5s ease;
+  animation-delay: 1s;
+}
+
+.shown {
+  opacity: 1;
+}
+
+.hidden {
+  opacity: 1;
+  animation: fadeOut 0.5s ease;
+}
+
+.slideIn {
+  animation: slideIn 0.5s ease;
+  animation-delay: 1s;
+}
+
+.slideOut {
+  animation: slideOut 0.5s ease;
 }
 
 /* Hero Section */
@@ -133,7 +293,7 @@ p {
 
 #parent_portal {
   padding: 0.5rem 0.7rem;
-  background-color: #ff9900;
+  background-color: var(--orange-default);
   border-radius: 0.5rem;
   border: none;
   gap: 1rem;
@@ -250,7 +410,17 @@ p {
   width: 33%;
   max-width: 430px;
   height: 1px;
-  background-color: #ff9900;
+  background-color: var(--orange-default);
+}
+
+@media (min-width: 640px) {
+  .about_staff_container {
+    flex-direction: column;
+  }
+
+  .about_staff_section {
+    padding: 5rem 5vw;
+  }
 }
 
 @media (min-width: 1280px) {
@@ -295,7 +465,7 @@ p {
 }
 
 .thank_sponsors_container h2 {
-  max-width: 328px;
+  max-width: 400px;
 }
 
 .thank_sponsors {
@@ -357,10 +527,15 @@ p {
 
 .stay_updated_container input[type="submit"] {
   height: 3rem;
-  background-color: #ff9900;
+  background-color: var(--orange-default);
   color: #151515;
   margin-top: 2rem;
   font-weight: bold;
   text-decoration: none;
   border: none;
+  cursor: pointer;
+}
+
+.stay_updated_container input[type="submit"]:hover {
+  background-color: var(--orange-hover);
 }

@@ -15,6 +15,26 @@
     />
   </head>
   <body>
+    <div id="modal_wrapper" class="modal_wrapper modal_default">
+      <div class="modal_container slideIn">
+        <img id="modal-btn" src="./assets/close_button.svg" />
+        <div class="modal_content">
+          <h1>Please enter your password</h1>
+          <form id="modal_form">
+            <input
+              type="password"
+              id="password"
+              placeholder="Enter password..."
+            />
+            <input type="submit" value="Sign in" />
+          </form>
+          <small>
+            If you have any sign in trouble, please reach out to the program
+            administrator.
+          </small>
+        </div>
+      </div>
+    </div>
     <div class="main_wrapper">
       <section class="hero_section">
         <div class="carousel_container">
@@ -150,7 +170,7 @@
       <section class="stay_updated_section">
         <div class="stay_updated_container">
           <h1>Stay Updated</h1>
-          <form id="stay_updated_form" method="post">
+          <form action="/" id="stay_updated_form" method="post">
             <input type="text" id="name" name="name" placeholder="Your name" />
             <input
               type="email"
@@ -159,7 +179,7 @@
               placeholder="Your email"
               required
             />
-            <input type="submit" value="Subscribe" />
+            <input type="submit" value="Sign up" />
           </form>
         </div>
       </section>
