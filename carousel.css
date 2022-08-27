@@ -33,8 +33,9 @@
   position: relative;
   display: flex;
   flex-direction: row;
-  min-height: 60%;
-  transform: translateX(-20%);
+  height: 66vh;
+  /* center the carousel */
+  transform: translateX(calc(1440px * 0.66 * -1 / 2));
 }
 
 .carousel_container img {
@@ -43,28 +44,26 @@
   transform: translateX(-400%);
   animation: scroll 32s ease infinite;
   animation-delay: 5s;
-  aspect-ratio: auto;
 }
 
 @media (min-width: 640px) {
   .carousel_container {
+    height: auto;
     transform: translateX(0%);
-    min-height: initial;
   }
 
   .carousel_container img {
-    width: 100%;
-    aspect-ratio: auto;
+    width: 100vw;
   }
 }
 
 @media (min-width: 1024px) {
   .carousel_container {
     transform: translateX(0%);
-    min-height: initial;
+    min-height: auto;
   }
   .carousel_container img {
-    width: 100%;
+    min-width: 100%;
     aspect-ratio: auto;
   }
 }

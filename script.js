@@ -1,6 +1,3 @@
-import "./styles.css";
-import "./carousel.css";
-
 function handleParentPortal() {
   console.log("hello world");
 }

@@ -7,41 +7,147 @@
     <title>Julien Lopez Assessment</title>
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="carousel.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Open+Sans:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div class="main_wrapper">
       <section class="hero_section">
         <div class="carousel_container">
-          <img class="carousel_image" src="/assets/banner_image_1.png" />
-          <img class="carousel_image" src="/assets/banner_image_2.png" />
-          <img class="carousel_image" src="/assets/banner_image_1.png" />
-          <img class="carousel_image" src="/assets/banner_image_2.png" />
-          <img class="carousel_image" src="/assets/banner_image_1.png" />
+          <img class="carousel_image" src="./assets/banner_image_1.png" />
+          <img class="carousel_image" src="./assets/banner_image_2.png" />
+          <img class="carousel_image" src="./assets/banner_image_1.png" />
+          <img class="carousel_image" src="./assets/banner_image_2.png" />
+          <img class="carousel_image" src="./assets/banner_image_1.png" />
         </div>
         <nav class="hero_nav">
           <ul>
-            <li><img src="/assets/level_up_new.svg" /></li>
+            <li><img src="./assets/level_up_new.svg" /></li>
             <li>
               <button id="parent_portal">ParentPortal</button>
             </li>
           </ul>
         </nav>
         <div class="hero_sponsors_section">
-          <h2>In Partnship With</h2>
           <div class="hero_sponsors_container">
             <div class="hero_sponsor">
-              <img src="/assets/level_up_logo_dark.svg" />
+              <img src="./assets/autio_logo.svg" />
             </div>
             <div class="hero_sponsor">
-              <img src="/assets/bettina_logo.png" />
+              <img src="./assets/los_agaves_logo.svg" />
             </div>
             <div class="hero_sponsor">
-              <img src="/assets/los_agaves_logo.svg" />
+              <img src="./assets/bettina_logo.png" />
             </div>
           </div>
         </div>
       </section>
+      <section class="about_section">
+        <h1>Home of Team LevelUp</h1>
+        <p>
+          Play to learn, play to practice, and you will win when you play in
+          games. Remember how much fun you had growing up when you used to just
+          go outside and play with your friends? We advocate using the "compete
+          to learn" approach to practice--it lets kids play and have fun while
+          competing. This type of practice, using competitive drills, does a
+          better job of preparing players to compete in real games. Technically,
+          this is called transference. What you do in practice carries over into
+          what you do in games.
+        </p>
+      </section>
+      <section class="about_section">
+        <h1>Program Mission & Goals</h1>
+        <p>
+          Want to improve your team's ball handling? Games like dribble knockout
+          are very popular. Every player must have his or her own basketball.
+          Coach starts the game. Every player must dribble constantly, stay
+          in-bounds and try to knock the ball away from all other players in the
+          game. Lose control of your basketball or go out-of-bounds, and you're
+          eliminated. Boundaries for 10-12 players could start as half the
+          court. After several players are eliminated, the boundary is reduced
+          to only inside the 3-point area. Boundary is reduced again to the
+          free-throw lane. Finally, when there are just two players left, they
+          play the "finals" in the free throw half circle.
+        </p>
+      </section>
+      <section class="about_staff_section">
+        <h1>Coaching Staff & Personnel</h1>
+        <div class="about_staff_container">
+          <div class="about_staff">
+            <h2>Damon Samper</h2>
+            <h3>Program Director</h3>
+            <p>
+              Coach Samper has more than a decade of experience coaching youth
+              as a developmental skills and team coach. He grew up playing in
+              Cleveland at a Div I school during the same time as Lebron James
+              and played collegiately and professionally in the ABA and UBA. He
+              has run training camps for the Cleveland Cavaliers and Utah Jazz
+              and, most recently, was Director of the LA Clippers Youth
+              Basketball Program. He has trained with the likes of Kyrie Irving,
+              Al Jefferson, Kyle Korver, and many more top NBA talent. Coach
+              Samper works and resides in Santa Barbara, CA as a teacher at a
+              local private school for elementary through middle school and is a
+              1:1 coach to many of the local kids across the city. His forte is
+              utilizing innovative tools for practical skills development while
+              making every session, practice, and game a fun and rewarding
+              experience. Most importantly, his demeanor and positivity working
+              with kids is completely in line with our Program Goals and
+              Mission. We are fortunate to have someone of his caliber in our
+              small locale.
+            </p>
+          </div>
+          <div class="about_staff">
+            <h2>Bill Doer</h2>
+            <h3>Program Director</h3>
+            <p>
+              Bill has been working with youth of all ages for many years across
+              a multitude of sports. He currently runs all youth programs for
+              the Montecito YMCA and after-school sports programs at the local
+              elementary school. Bill was one of the founders of Team LevelUp
+              due to his desire to provide the local basketball youth with a
+              club team that would allow a more competitive, traveling option
+              for the community.
+            </p>
+            <p>
+              Team LevelUp is under the YMCA umbrella and as Program Director,
+              Bill oversees all registration, scheduling, and communication
+              (among many other hats) for the Team.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="thank_sponsors_section">
+        <img id="footer_image" src="./assets/footer_image.png" />
+        <div class="thank_sponsors_container">
+          <h2>Thank You to Our Generous Sponsors</h2>
+          <div class="thank_sponsors">
+            <img src="./assets/2Leaf_Logo.svg" />
+            <img src="./assets/the_void_logo.svg" />
+            <img src="./assets/tim_walsh_logo.svg" />
+          </div>
+        </div>
+      </section>
+      <section class="stay_updated_section">
+        <div class="stay_updated_container">
+          <h1>Stay Updated</h1>
+          <form>
+            <input type="text" id="name" name="name" placeholder="Your name" />
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Your email"
+              required
+            />
+            <input type="submit" value="Subscribe" />
+          </form>
+        </div>
+      </section>
     </div>
-    <script src="/script.js"></script>
+    <script src="./script.js"></script>
   </body>
 </html>
