@@ -10,10 +10,19 @@ Thank you,
 </br>
 Julien
 
+## Installing dependencies
+
+To run the app, please clone, download, and install the package dependencies (nodemon node and express).
+</br>
+(I think this is correct, I've never instructed anyone on how to download and run my apps locally)
+
+    > git clone https://github.com/juuuuurien/assessment-julien-lopez.git
+    > npm install
+
 ## Running Express server
 
 To serve some backend code, I chose Node.js and Express, with nodemon for auto save refreshes. To run the local server run:
 
-    nodemon express.js
+    > nodemon express.js
 
 in your terminal. This will run the express server to http://localhost:8080/
