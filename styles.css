@@ -17,13 +17,6 @@ body {
   color: #151515;
 }
 
-button {
-  display: flex;
-  font-family: "Open Sans", sans-serif;
-  justify-content: center;
-  align-items: center;
-}
-
 h1,
 h2,
 h3,
@@ -54,9 +47,60 @@ p {
   flex: 6;
 }
 
+button {
+  display: flex;
+  font-family: "Open Sans", sans-serif;
+  justify-content: center;
+  align-items: center;
+}
+
+input {
+  padding: 0 1rem;
+  font-weight: 600;
+  font-family: "Open Sans", sans-serif;
+  height: 3rem;
+  border: 2px solid gray;
+  font-size: 1rem;
+}
+
 .main_wrapper {
   width: 100vw;
   height: 100vh;
+}
+
+@keyframes popup {
+  0% {
+    transform: translateY(0);
+  }
+  5%,
+  95% {
+    transform: translateY(-6rem);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.popup {
+  animation: popup 3s ease-in-out;
+}
+
+#error_modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: auto;
+  padding: 0.5rem 1rem;
+  background-color: lightcoral;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  position: fixed;
+  bottom: -3rem;
+  right: 3rem;
+  border-radius: 5px;
+  z-index: 1000;
 }
 
 /* Modal */
@@ -118,7 +162,6 @@ p {
   height: 3rem;
   border: 2px solid gray;
   font-size: 1rem;
-  padding: 0 0.5rem;
 }
 
 .modal_container input[type="submit"] {
@@ -292,13 +335,14 @@ p {
 }
 
 #parent_portal {
+  height: fit-content;
   padding: 0.5rem 0.7rem;
   background-color: var(--orange-default);
   border-radius: 0.5rem;
   border: none;
-  gap: 1rem;
   transition: 0.2s ease;
   white-space: nowrap;
+  gap: 1rem;
 }
 
 #parent_portal:hover {
@@ -338,6 +382,12 @@ p {
   .hero_sponsors_container img {
     max-height: 20%;
     aspect-ratio: auto;
+  }
+
+  #parent_portal {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-right: 3rem;
   }
 }
 

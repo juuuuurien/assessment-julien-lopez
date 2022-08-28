@@ -1,0 +1,28 @@
+{
+  "name": "assessment-julien-lopez",
+  "version": "1.0.0",
+  "description": "Hello! If you're reading this, it means that you have moved on your coding assessment with 2Leaf.",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juuuuurien/assessment-julien-lopez.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/juuuuurien/assessment-julien-lopez/issues"
+  },
+  "homepage": "https://github.com/juuuuurien/assessment-julien-lopez#readme",
+  "dependencies": {
+    "buffer": "^6.0.3",
+    "cors": "^2.8.5",
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}

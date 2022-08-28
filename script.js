@@ -22,25 +22,33 @@ function handleParentPortal() {
 // something along those lines
 let modal_wrapper = document.getElementById("modal_wrapper");
 let modal = document.querySelector(".modal_container");
-let modalBtn = document.querySelector("#modal-btn");
+let modalCloseBtn = document.querySelector("#modal-btn");
+let modalFormSubmitBtn = document.querySelector("#modal-form-submit-btn");
 
 let parentPortal = document.getElementById("parent_portal");
-parentPortal.onclick = handleParentPortal;
 
 let stayUpdatedForm = document.getElementById("stay_updated_form");
 
-modalBtn.onclick = () => {
+// ***** Handle Modal Actions. *****
+const closeModal = () => {
+  // close modal helper fn
   modal_wrapper.classList.replace("shown", "hidden");
   modal.classList.replace("slideIn", "slideOut");
 };
 
+modalCloseBtn.onclick = () => {
+  modal_wrapper.classList.replace("shown", "hidden");
+  modal.classList.replace("slideIn", "slideOut");
+};
+
+// this checks if the click is within the modal or not, if it isn't, it closes the modal
 window.addEventListener("click", (event) => {
   if (!modal.contains(event.target)) {
-    modal_wrapper.classList.replace("shown", "hidden");
-    modal.classList.replace("slideIn", "slideOut");
+    closeModal();
   }
 });
 
+// this removes the modal from dom when the modal fades out
 window.addEventListener("animationend", (event) => {
   // when done fading in, keep opacity at 1
   if (event.animationName === "fadeIn")
@@ -49,3 +57,52 @@ window.addEventListener("animationend", (event) => {
   // when done fading out, remove from DOM
   if (event.animationName === "fadeOut") modal_wrapper.style.display = "none";
 });
+
+// To add basic auth, I'll use a simple cookie, set by the modal. If the cookie exists, the user can navigate
+//  else, the user is redirected to the homepage.
+
+// handle submit button
+
+const modalForm = document.querySelector("#modal_form");
+const modalFormBtn = document.querySelector("#modal-form-submit-btn");
+
+console.log(modalFormBtn);
+modalFormBtn.onclick = (event) => {
+  event.preventDefault();
+  // get form data and create a cookie (obviously not the best practice to set password directly as a cookie. This could be a jwt or something if its real auth)
+  let formData = new FormData(modalForm);
+  let password = formData.get("password");
+  let buff = btoa(password); //btoa is deprecated, but couldnt find a reliable way to encode a string on client side. (cant use Buffer methods)
+  console.log(buff);
+  document.cookie = `password=${buff}`;
+  closeModal();
+};
+
+// handle parent portal click
+
+parentPortal.onclick = async () => {
+  let headers = new Headers(); // create new header object and append with DOM data.
+
+  headers.set(
+    "Authorization",
+    "Basic " + document.cookie // create basic auth header with encoded data...
+  );
+
+  const isCookieSet = await (
+    await fetch("http://localhost:8080/api/auth", {
+      method: "GET",
+      headers: headers,
+    })
+  ).json();
+
+  console.log(isCookieSet);
+
+  if (isCookieSet.status === 200) {
+  }
+
+  if (isCookieSet.status === 401) {
+    let error_modal = document.querySelector("#error_modal");
+    error_modal.innerHTML = "Error: Not Authorized!";
+    error_modal.classList.add("popup");
+  }
+};
