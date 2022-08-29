@@ -89,10 +89,13 @@ parentPortal.onclick = async () => {
   );
 
   const isCookieSet = await (
-    await fetch("http://localhost:8080/api/auth", {
-      method: "GET",
-      headers: headers,
-    })
+    await fetch(
+      `https://8080-juuuuurien-assessmentju-15j0ggkmlwc.ws-us63.gitpod.io/api/auth`,
+      {
+        method: "GET",
+        headers: headers,
+      }
+    )
   ).json();
 
   console.log(isCookieSet);
@@ -104,5 +107,26 @@ parentPortal.onclick = async () => {
     let error_modal = document.querySelector("#error_modal");
     error_modal.innerHTML = "Error: Not Authorized!";
     error_modal.classList.add("popup");
+    
   }
 };
+
+// this helper function takes a cookie name as a parameter and returns that cookie's value
+// I took this helper from https://www.w3schools.com/js/js_cookies.asp
+// 
+// I used this helper from e3, but the "auth" logic is all my own
+function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
