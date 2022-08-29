@@ -61,6 +61,9 @@ window.addEventListener("animationend", (event) => {
 
   // when done fading out, remove from DOM
   if (event.animationName === "fadeOut") modal_wrapper.style.display = "none";
+
+  // reset popup styles
+  if (event.animationName === "popup") popup.classList.remove("popup");
 });
 
 // To add basic auth, I'll use a simple cookie, set by the modal. If the cookie exists, the user can navigate
@@ -100,7 +103,7 @@ parentPortalBtn.onclick = async () => {
 
   if (isCookieSet.status === 200) {
     popup.innerHTML = "Navigating...";
-    popup.style.backgroundColor = "white";
+    popup.style.backgroundColor = "Aquamarine";
     popup.classList.add("popup");
   }
 
@@ -113,7 +116,7 @@ parentPortalBtn.onclick = async () => {
 
 subscribeButton.onclick = async (event) => {
   event.preventDefault();
-
+  subscribeButton.value = "loading...";
   let formData = new FormData(subscribeForm);
   let name = formData.get("name");
   let email = formData.get("email");
@@ -122,7 +125,7 @@ subscribeButton.onclick = async (event) => {
 
   const response = await (
     await fetch(
-      `https://8080-juuuuurien-assessmentju-15j0ggkmlwc.ws-us63.gitpod.io/api/emails`,
+      `https://8080-juuuuurien-assessmentju-15j0ggkmlwc.ws-us63.gitpod.io/api/subscribe`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -132,8 +135,9 @@ subscribeButton.onclick = async (event) => {
   ).json();
 
   if (response.status === 200 && response.message) {
+    subscribeButton.value = "Subscribed!";
     popup.innerHTML = response.message;
-    popup.style.backgroundColor = "lightgreen";
+    popup.style.backgroundColor = "Aquamarine";
     popup.classList.add("popup");
   }
   console.log(response);
