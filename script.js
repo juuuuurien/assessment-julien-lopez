@@ -1,5 +1,6 @@
 function handleParentPortal() {
   console.log("hello world");
+  console.log(process.env.PUBLIC_URL);
 }
 
 // I just noticed the JS test included creating the carousel. I didn't need js for it

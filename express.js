@@ -2,6 +2,11 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const cors = require("cors");
+const dotenv = require("dotenv");
+dotenv.config({
+  path: "./.env.local",
+});
+
 const { MongoClient } = require("mongodb");
 // this would usually be held in a .env, but decided not to install the dotenv or require packages
 const MONGODB_URI =
