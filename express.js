@@ -6,11 +6,10 @@ const dotenv = require("dotenv");
 dotenv.config({
   path: "./.env.local",
 });
-
 const { MongoClient } = require("mongodb");
-// this would usually be held in a .env, but decided not to install the dotenv or require packages
-const MONGODB_URI =
-  "mongodb+srv://admin:2leafpleasehireme@cluster0.fghrsho.mongodb.net/?retryWrites=true&w=majority";
+
+const PORT = process.env.PORT;
+const MONGODB_URI = process.env.MONGODB_URI;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -20,7 +19,6 @@ app.get("/api/auth", (req, res) => {
   const headers = req.headers.authorization.split(" "); // so headers comes in as "Basic 'encoded data'" So we gotta split it
 
   if (headers.length < 2) res.json({ error: "Not Authorized!", status: 401 }); // Guard clause to reject early if no cookies
-
   if (headers.length > 1) {
     // if cookies present
     headers.slice(0, 1); // cut off 'Basic' element from array
@@ -87,6 +85,6 @@ const connectDB = async () => {
   }
 };
 
-app.listen(8080, () => {
+app.listen(PORT || 8080, () => {
   console.log("Server started on port 8080");
 });
