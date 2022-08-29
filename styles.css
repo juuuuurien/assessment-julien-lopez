@@ -85,15 +85,14 @@ input {
   animation: popup 3s ease-in-out;
 }
 
-#error_modal {
+#popup {
   display: flex;
   justify-content: center;
   align-items: center;
   height: auto;
   width: auto;
   padding: 0.5rem 1rem;
-  background-color: lightcoral;
-  color: white;
+  color: #151515;
   font-size: 1rem;
   font-weight: bold;
   position: fixed;

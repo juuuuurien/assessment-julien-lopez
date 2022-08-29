@@ -23,9 +23,13 @@ function handleParentPortal() {
 let modal_wrapper = document.getElementById("modal_wrapper");
 let modal = document.querySelector(".modal_container");
 let modalCloseBtn = document.querySelector("#modal-btn");
-let modalFormSubmitBtn = document.querySelector("#modal-form-submit-btn");
+let modalForm = document.querySelector("#modal_form");
+let modalFormBtn = document.querySelector("#modal-form-submit-btn");
+let parentPortalBtn = document.querySelector("#parent_portal");
+let subscribeButton = document.querySelector("#subscribe_btn");
+let subscribeForm = document.querySelector("#stay_updated_form");
 
-let parentPortal = document.getElementById("parent_portal");
+let popup = document.querySelector("#popup");
 
 let stayUpdatedForm = document.getElementById("stay_updated_form");
 
@@ -63,10 +67,6 @@ window.addEventListener("animationend", (event) => {
 
 // handle submit button
 
-const modalForm = document.querySelector("#modal_form");
-const modalFormBtn = document.querySelector("#modal-form-submit-btn");
-
-console.log(modalFormBtn);
 modalFormBtn.onclick = (event) => {
   event.preventDefault();
   // get form data and create a cookie (obviously not the best practice to set password directly as a cookie. This could be a jwt or something if its real auth)
@@ -79,8 +79,7 @@ modalFormBtn.onclick = (event) => {
 };
 
 // handle parent portal click
-
-parentPortal.onclick = async () => {
+parentPortalBtn.onclick = async () => {
   let headers = new Headers(); // create new header object and append with DOM data.
 
   headers.set(
@@ -98,35 +97,43 @@ parentPortal.onclick = async () => {
     )
   ).json();
 
-  console.log(isCookieSet);
-
   if (isCookieSet.status === 200) {
+    popup.innerHTML = "Navigating...";
+    popup.style.backgroundColor = "white";
+    popup.classList.add("popup");
   }
 
   if (isCookieSet.status === 401) {
-    let error_modal = document.querySelector("#error_modal");
-    error_modal.innerHTML = "Error: Not Authorized!";
-    error_modal.classList.add("popup");
-    
+    popup.innerHTML = "Error: Not Authorized!";
+    popup.style.backgroundColor = "lightcoral";
+    popup.classList.add("popup");
   }
 };
 
-// this helper function takes a cookie name as a parameter and returns that cookie's value
-// I took this helper from https://www.w3schools.com/js/js_cookies.asp
-// 
-// I used this helper from e3, but the "auth" logic is all my own
-function getCookie(cname) {
-  let name = cname + "=";
-  let decodedCookie = decodeURIComponent(document.cookie);
-  let ca = decodedCookie.split(';');
-  for(let i = 0; i <ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
+subscribeButton.onclick = async (event) => {
+  event.preventDefault();
+
+  let formData = new FormData(subscribeForm);
+  let name = formData.get("name");
+  let email = formData.get("email");
+  const body = JSON.stringify({ name: name, email: email });
+  console.log(body);
+
+  const response = await (
+    await fetch(
+      `https://8080-juuuuurien-assessmentju-15j0ggkmlwc.ws-us63.gitpod.io/api/emails`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: body,
+      }
+    )
+  ).json();
+
+  if (response.status === 200 && response.message) {
+    popup.innerHTML = response.message;
+    popup.style.backgroundColor = "lightgreen";
+    popup.classList.add("popup");
   }
-  return "";
-}
+  console.log(response);
+};

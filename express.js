@@ -1,4 +1,5 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 const app = express();
 const cors = require("cors");
 const { MongoClient } = require("mongodb");
@@ -7,7 +8,8 @@ const MONGODB_URI =
   "mongodb+srv://admin:2leafpleasehireme@cluster0.fghrsho.mongodb.net/?retryWrites=true&w=majority";
 
 app.use(cors());
-// app.use(express.static(__dirname + "/"));
+app.use(bodyParser.json());
+app.use(express.static(__dirname + "/"));
 
 app.get("/api/auth", (req, res) => {
   const headers = req.headers.authorization.split(" "); // so headers comes in as "Basic 'encoded data'" So we gotta split it
@@ -26,8 +28,6 @@ app.get("/api/auth", (req, res) => {
       cookies[cname] = value;
     });
 
-    console.log(cookies);
-
     if ("password" in cookies)
       res.json({ message: "Authorized!", status: 200 }); // if 'password' cookie was sent, user is 'authorized'
   }
@@ -40,13 +40,29 @@ app.get("/api/emails", async (req, res) => {
     .collection("emails")
     .find({})
     .toArray();
-  console.log(emails);
-  res.send(emails);
+
+  res.json(emails); // returns a json array of 'users' with {name: string, email:string}
 });
 
-// app.post('/api/emails', async (req, res) => {
+app.post("/api/emails", async (req, res) => {
+  const { name, email } = req.body;
+  console.log(name, email);
+  const client = await connectDB();
 
-// })
+  try {
+    await client
+      .db("2leaf_assessment")
+      .collection("emails")
+      .insertOne({ email: email, name: name });
+
+    res.json({ status: 200, message: `${name} subscribed!` });
+  } catch (e) {
+    console.log("error");
+    console.error(e);
+
+    res.json({ status: 400, message: e });
+  }
+});
 
 // mongoDB connection helper fn
 const connectDB = async () => {
