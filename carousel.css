@@ -36,14 +36,17 @@
   height: 66vh;
   /* center the carousel */
   transform: translateX(calc(1440px * 0.66 * -1 / 2));
+  z-index: 0;
 }
 
-.carousel_container img {
+.carousel_image {
   display: flex;
   flex: 1;
   transform: translateX(-400%);
   animation: scroll 32s ease infinite;
   animation-delay: 5s;
+  height: 100%;
+  aspect-ratio: auto;
 }
 
 @media (min-width: 640px) {
@@ -52,7 +55,7 @@
     transform: translateX(0%);
   }
 
-  .carousel_container img {
+  .carousel_image img {
     width: 100vw;
   }
 }

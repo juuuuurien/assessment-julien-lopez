@@ -35,6 +35,13 @@ let popup = document.querySelector("#popup");
 let stayUpdatedForm = document.getElementById("stay_updated_form");
 
 // ***** Handle Modal Actions. *****
+const openModal = () => {
+  // open modal helper fn
+  modal_wrapper.style.display = "flex";
+  modal_wrapper.classList.replace("hidden", "modal_default");
+  modal.classList.replace("slideOut", "slideIn");
+};
+
 const closeModal = () => {
   // close modal helper fn
   modal_wrapper.classList.replace("shown", "hidden");
@@ -42,44 +49,39 @@ const closeModal = () => {
 };
 
 modalCloseBtn.onclick = () => {
-  modal_wrapper.classList.replace("shown", "hidden");
-  modal.classList.replace("slideIn", "slideOut");
+  closeModal();
 };
 
-// this checks if the click is within the modal or not, if it isn't, it closes the modal
+// This checks if the click is within the modal or not, if it isn't, it closes the modal
 window.addEventListener("click", (event) => {
   if (!modal.contains(event.target)) {
     closeModal();
   }
 });
 
-// this removes the modal from dom when the modal fades out
+// This listener removes the modal from dom when the modal fades out
 window.addEventListener("animationend", (event) => {
-  // when done fading in, keep opacity at 1
   if (event.animationName === "fadeIn")
     modal_wrapper.classList.replace("modal_default", "shown");
-
-  // when done fading out, remove from DOM
   if (event.animationName === "fadeOut") modal_wrapper.style.display = "none";
-
-  // reset popup styles
   if (event.animationName === "popup") popup.classList.remove("popup");
 });
 
 // To add basic auth, I'll use a simple cookie, set by the modal. If the cookie exists, the user can navigate
-//  else, the user is redirected to the homepage.
+// else, the user is redirected to the homepage.
 
-// handle submit button
-
+// Handle modal submit button
 modalFormBtn.onclick = (event) => {
   event.preventDefault();
-  // get form data and create a cookie (obviously not the best practice to set password directly as a cookie. This could be a jwt or something if its real auth)
   let formData = new FormData(modalForm);
   let password = formData.get("password");
   let buff = btoa(password); //btoa is deprecated, but couldnt find a reliable way to encode a string on client side. (cant use Buffer methods)
-  console.log(buff);
-  document.cookie = `password=${buff}`;
+
+  document.cookie = `parentportal_password=${buff}`;
   closeModal();
+  popup.innerHTML = "Logged in!";
+  popup.style.backgroundColor = "white";
+  popup.classList.add("popup");
 };
 
 // handle parent portal click
@@ -92,13 +94,10 @@ parentPortalBtn.onclick = async () => {
   );
 
   const isCookieSet = await (
-    await fetch(
-      `https://8080-juuuuurien-assessmentju-15j0ggkmlwc.ws-us63.gitpod.io/api/auth`,
-      {
-        method: "GET",
-        headers: headers,
-      }
-    )
+    await fetch(`/api/auth`, {
+      method: "GET",
+      headers: headers,
+    })
   ).json();
 
   if (isCookieSet.status === 200) {
@@ -111,8 +110,11 @@ parentPortalBtn.onclick = async () => {
     popup.innerHTML = "Error: Not Authorized!";
     popup.style.backgroundColor = "lightcoral";
     popup.classList.add("popup");
+    openModal();
   }
 };
+
+// handle subscribe form submission
 
 subscribeButton.onclick = async (event) => {
   event.preventDefault();
@@ -121,17 +123,13 @@ subscribeButton.onclick = async (event) => {
   let name = formData.get("name");
   let email = formData.get("email");
   const body = JSON.stringify({ name: name, email: email });
-  console.log(body);
 
   const response = await (
-    await fetch(
-      `https://8080-juuuuurien-assessmentju-15j0ggkmlwc.ws-us63.gitpod.io/api/subscribe`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: body,
-      }
-    )
+    await fetch(`/api/subscribe`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: body,
+    })
   ).json();
 
   if (response.status === 200 && response.message) {
@@ -140,5 +138,4 @@ subscribeButton.onclick = async (event) => {
     popup.style.backgroundColor = "Aquamarine";
     popup.classList.add("popup");
   }
-  console.log(response);
 };

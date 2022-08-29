@@ -26,3 +26,7 @@ To serve some backend code, I chose Node.js and Express, with nodemon for auto s
     > npm start
 
 in your terminal. This will run the express server to http://localhost:8080/
+
+## Testing the Database
+
+I decided to use MongoDB as the database to store user emails.

@@ -273,6 +273,7 @@ input {
   height: 66vh;
   top: 0;
   right: 0;
+  z-index: 1;
 }
 
 .hero_section ul {
@@ -359,18 +360,33 @@ input {
 
 @media (min-width: 640px) {
   .hero_section nav {
-    height: auto;
+    position: absolute;
+    display: flex;
+    height: 100%;
+  }
+
+  .hero_section h1 {
+    position: absolute;
+    bottom: 3rem;
+    left: 10rem;
+    color: #f5f5f5;
+    margin: 0;
   }
 
   .hero_section ul {
+    max-height: 25%;
     flex-direction: row;
     justify-content: space-between;
   }
 
+  .hero_nav li {
+    height: 100%;
+    width: auto;
+  }
+
   .hero_nav img {
-    width: 90%;
-    max-width: 80%;
-    margin-top: -10%;
+    height: 100%;
+    aspect-ratio: auto;
   }
 
   .hero_sponsors_container {
@@ -587,4 +603,45 @@ input {
 
 .stay_updated_container input[type="submit"]:hover {
   background-color: var(--orange-hover);
+}
+
+/* Parent Portal Components */
+/* ===================== */
+
+#spring_schedule_background {
+  height: 100%;
+  width: auto;
+  z-index: 0;
+}
+
+.spring_schedule_section {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  color: #f5f5f5;
+  background-color: #151515;
+  justify-content: center;
+  align-items: center;
+  padding: 5rem 12vw;
+  gap: 3rem;
+}
+
+.spring_schedule_left {
+  position: relative;
+  display: flex;
+  flex: 4;
+  flex-direction: column;
+}
+
+.spring_schedule_right {
+  display: flex;
+  flex: 6;
+  flex-direction: column;
+}
+
+.spring_schedule_left h1 {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  max-width: 50%;
 }

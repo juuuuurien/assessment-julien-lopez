@@ -19,8 +19,13 @@ router.get("/", (req, res) => {
       cookies[cname] = value;
     });
 
-    if ("password" in cookies)
+    if ("parentportal_password" in cookies) {
+      console.log("authorized");
       res.json({ message: "Authorized!", status: 200 }); // if 'password' cookie was sent, user is 'authorized'
+    } else {
+      console.log("unauthorized");
+      res.json({ message: "Error: Unauthorized!", status: 401 });
+    }
   }
 });
 

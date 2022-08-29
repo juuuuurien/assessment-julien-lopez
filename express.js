@@ -13,7 +13,12 @@ const PORT = process.env.PORT;
 // Initialize middleware
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static(__dirname + "/"));
+app.use(express.static(__dirname));
+
+app.get("/", (req, res) => res.sendFile(__dirname + "/index.html"));
+app.get("/parent_portal", (req, res) =>
+  res.sendFile(__dirname + "/parent_portal.html")
+);
 
 // Routes
 app.use("/api/auth", require("./routes/api/auth"));
