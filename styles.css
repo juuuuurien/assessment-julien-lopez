@@ -268,12 +268,16 @@ input {
 
 .hero_section nav {
   display: flex;
+  flex-direction: column;
   position: absolute;
+  justify-content: center;
+  align-items: center;
   max-width: 100vw;
-  height: 66vh;
+  height: 100%;
   top: 0;
   right: 0;
   z-index: 1;
+  transform: translateX(calc(1440px * 0.66 / 2));
 }
 
 .hero_section ul {
@@ -296,6 +300,11 @@ input {
 
 .hero_nav li {
   list-style-type: none;
+}
+
+.hero_section h1 {
+  color: #f5f5f5;
+  margin: 0;
 }
 
 .hero_sponsors_section {
@@ -361,8 +370,11 @@ input {
 @media (min-width: 640px) {
   .hero_section nav {
     position: absolute;
+    justify-content: start;
+    align-items: start;
     display: flex;
     height: 100%;
+    transform: translateX(0%);
   }
 
   .hero_section h1 {
@@ -377,6 +389,7 @@ input {
     max-height: 25%;
     flex-direction: row;
     justify-content: space-between;
+    box-sizing: border-box;
   }
 
   .hero_nav li {
@@ -573,11 +586,12 @@ input {
   padding: 6rem 0;
 }
 .stay_updated_container {
-  min-width: 27rem;
+  min-width: 90%;
   background-color: #151515;
 }
 
 .stay_updated_container h1 {
+  text-align: center;
   margin: 2rem 2rem;
 }
 .stay_updated_container form {
@@ -605,49 +619,52 @@ input {
   background-color: var(--orange-hover);
 }
 
+#subscribe_errors {
+  color: lightcoral;
+}
+
+@media (min-width: 640px) {
+  .stay_updated_container {
+    min-width: 27rem;
+  }
+}
+
 /* Parent Portal Components */
 /* ===================== */
 
 .spring_schedule_section {
   position: relative;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   color: #f5f5f5;
   background-color: #151515;
   justify-content: center;
   align-items: center;
-  padding: 5rem 10vw;
+  padding: 5rem;
   gap: 3rem;
 }
 
 .spring_schedule_left {
-  width: 45%;
+  width: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
 }
 
 #spring_schedule_background {
-  height: 100%;
-  width: auto;
+  width: 100%;
+  height: auto;
   z-index: 0;
 }
 
 .spring_schedule_right {
-  width: 60%;
-}
-
-.spring_schedule_left h1 {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  max-width: 50%;
+  width: 100%;
 }
 
 .cost_seasons_section {
   position: relative;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   color: #f5f5f5;
   background-color: #151515;
   justify-content: center;
@@ -658,4 +675,44 @@ input {
 
 #highlighted {
   color: var(--orange-default);
+}
+
+@media (min-width: 640px) {
+  .spring_schedule_section {
+    flex-direction: row;
+    padding: 5vh 10vw;
+  }
+
+  .spring_schedule_left {
+    width: 45%;
+  }
+
+  .spring_schedule_right {
+    width: 60%;
+  }
+
+  .spring_schedule_left h1 {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    max-width: 50%;
+  }
+
+  .cost_seasons_section {
+    flex-direction: row;
+  }
+
+  .cost {
+    max-width: 720px;
+  }
+  .seasons {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 1024px) {
+  #spring_schedule_background {
+    height: 100%;
+    z-index: 0;
+  }
 }

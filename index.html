@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Julien Lopez Assessment</title>
+    <title>Level Up</title>
+    <link rel="shortcut icon" href="#" />
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="carousel.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -178,7 +179,13 @@
         <div class="stay_updated_container">
           <h1>Stay Updated</h1>
           <form action="/" id="stay_updated_form" method="post">
-            <input type="text" id="name" name="name" placeholder="Your name" />
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Your name"
+              required
+            />
             <input
               type="email"
               id="email"
@@ -186,6 +193,7 @@
               placeholder="Your email"
               required
             />
+            <span id="subscribe_errors"></span>
             <input id="subscribe_btn" type="submit" value="Sign up" />
           </form>
         </div>

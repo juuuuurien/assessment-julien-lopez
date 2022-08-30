@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const { check, validationResult } = require("express-validator");
 const { MongoClient } = require("mongodb");
 
 const dotenv = require("dotenv");
@@ -22,25 +23,55 @@ router.get("/", async (req, res) => {
   res.json(emails); // returns a json array of 'users' with {name: string, email:string}
 });
 
-router.post("/", async (req, res) => {
-  const { name, email } = req.body;
-  console.log(name, email);
-  const client = await connectDB();
+router.post(
+  "/",
+  check("email").isEmail().withMessage("Error: Email is not valid"),
+  async (req, res) => {
+    const { name, email } = req.body;
 
-  try {
-    await client
-      .db("2leaf_assessment")
-      .collection("emails")
-      .insertOne({ email: email, name: name });
+    if (!name || !email) {
+      return res.json({
+        errors: [{ msg: "Error: Name and Email are required" }],
+      });
+    }
 
-    res.json({ status: 200, message: `${name} subscribed!` });
-  } catch (e) {
-    console.log("error");
-    console.error(e);
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.json({ errors: errors.array() });
+    }
 
-    res.json({ status: 400, message: e });
+    const client = await connectDB();
+    // check if email already exists in db
+    try {
+      const emails = await client
+        .db("2leaf_assessment")
+        .collection("emails")
+        .find({ email })
+        .toArray();
+      if (emails.length > 0) {
+        return res.json({ errors: [{ msg: "Error: Email already exists" }] });
+      }
+    } catch (e) {
+      console.log("error");
+      console.error(e);
+      res.json({ status: 400, message: e });
+    }
+
+    try {
+      await client
+        .db("2leaf_assessment")
+        .collection("emails")
+        .insertOne({ email: email, name: name });
+
+      res.json({ status: 200, message: `${name} subscribed!` });
+    } catch (e) {
+      console.log("error");
+      console.error(e);
+
+      res.json({ status: 400, message: e });
+    }
   }
-});
+);
 
 // mongoDB connection helper fn
 const connectDB = async () => {

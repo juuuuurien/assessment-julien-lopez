@@ -51,11 +51,12 @@
 
 @media (min-width: 640px) {
   .carousel_container {
+    width: 100vw;
     height: auto;
     transform: translateX(0%);
   }
 
-  .carousel_image img {
+  .carousel_image {
     width: 100vw;
   }
 }
