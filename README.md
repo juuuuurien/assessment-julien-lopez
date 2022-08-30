@@ -21,13 +21,22 @@ To run the app, please clone, download, and install the package dependencies (no
     > git clone https://github.com/juuuuurien/assessment-julien-lopez.git
     > npm install
 
-## Running Express server
+## Running Express Server
 
 To serve some backend code, I chose Node.js and Express, with nodemon for auto save refreshes. To run the local server run:
 
     > npm start
 
 in your terminal. This will run the express server to http://localhost:8080/
+
+## "Logging in" via Modal
+
+The way I setup auth was to pass the password straight into a cookie, passing that over to the server, and validating it there.
+<br />
+Obviously, in a real world app, I would probably use a jwt, or OAuth instead.
+<br />
+
+    > To Sign in via the Modal. Enter: "HireMe123" into the text field.
 
 ## Testing the Database
 

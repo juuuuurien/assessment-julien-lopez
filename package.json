@@ -4,7 +4,7 @@
   "description": "Hello! If you're reading this, it means that you have moved on your coding assessment with 2Leaf.",
   "main": "script.js",
   "scripts": {
-    "start": "nodemon express.js",
+    "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

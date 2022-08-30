@@ -15,6 +15,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(__dirname));
 
+// statically serve some html
 app.get("/", (req, res) => res.sendFile(__dirname + "/index.html"));
 app.get("/parentportal", (req, res) =>
   res.sendFile(__dirname + "/parentportal.html")

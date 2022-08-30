@@ -1,14 +1,10 @@
-function handleParentPortal() {
-  console.log("hello world");
-  console.log(process.env.PUBLIC_URL);
-}
-
 // I just noticed the JS test included creating the carousel. I didn't need js for it
-// because my first thought was to impliment one in CSS to avoid bugs etc.
+// because my first reaction was to impliment one in CSS to avoid bugs etc.
 //
-// What I WOULD do if I used JS would be to get an array of all images --> Array.from(decoument.querySelectorAll("carousel-img"))
+// What I WOULD do if I used JS would be to get an array of all images and then
 // align them next to eachother, somthing like
 //
+//                                Array.from(decoument.querySelectorAll("carousel-img"))m">
 //                                images.forEach((image, index) => image.style.transform = `translateX(${index * img width}px)`)
 //
 //
@@ -18,9 +14,9 @@ function handleParentPortal() {
 //
 // then, get the image that left the container (which is the head of the array) and translate it all the way to the left,
 //
-//                                 so like translateX(-img-width * imgages.length))
+//                                 so like translateX(-img-width * imgages.length)) etc.
 //
-// something along those lines
+
 let modal_wrapper = document.getElementById("modal_wrapper");
 let modal = document.querySelector(".modal_container");
 let modalCloseBtn = document.querySelector("#modal-btn");
@@ -70,47 +66,62 @@ if (modal !== null) {
     if (event.animationName === "popup") popup.classList.remove("popup");
   });
 
-  // To add basic auth, I'll use a simple cookie, set by the modal. If the cookie exists, the user can navigate
-  // else, the user is redirected to the homepage.
-
   // Handle modal submit button
-  modalFormBtn.onclick = (event) => {
-    event.preventDefault();
-    let formData = new FormData(modalForm);
-    let password = formData.get("password");
-    let buff = btoa(password); //btoa is deprecated, but couldnt find a reliable way to encode a string on client side. (cant use Buffer methods)
-
-    document.cookie = `parentportal_password=${buff}`;
-    closeModal();
-    popup.innerHTML = "Logged in!";
-    popup.style.backgroundColor = "white";
-    popup.classList.add("popup");
-  };
-
-  // handle parent portal click
-  parentPortalBtn.onclick = async () => {
+  const checkPassword = async () => {
     let headers = new Headers(); // create new header object and append with DOM data.
-
     headers.set(
       "Authorization",
       "Basic " + document.cookie // create basic auth header with encoded data...
     );
 
-    const isCookieSet = await (
+    console.log(document.cookie);
+
+    const isValid = await (
       await fetch(`/api/auth`, {
         method: "GET",
         headers: headers,
       })
     ).json();
 
-    if (isCookieSet.status === 200) {
+    return isValid.status;
+  };
+
+  modalFormBtn.onclick = async (event) => {
+    event.preventDefault();
+    let formData = new FormData(modalForm);
+    let password = formData.get("password");
+
+    // here I'm passing in the password directly. In a real world app, this would be encrypted and stored in a database etc
+    // but for the sake of the demo, I'm just passing it in directly.
+    document.cookie = `parentportal_password=${password}`;
+
+    const authStatus = await checkPassword();
+
+    if (authStatus === 200) {
+      popup.innerHTML = "Password accepted!";
+      popup.style.backgroundColor = "Aquamarine";
+      popup.classList.add("popup");
+      closeModal();
+    }
+
+    if (authStatus === 401) {
+      popup.innerHTML = "Error: Not Authorized!";
+      popup.style.backgroundColor = "lightcoral";
+      popup.classList.add("popup");
+    }
+  };
+
+  // handle parent portal click
+  parentPortalBtn.onclick = async () => {
+    const authStatus = await checkPassword();
+    if (authStatus === 200) {
       popup.innerHTML = "Navigating...";
       popup.style.backgroundColor = "Aquamarine";
       popup.classList.add("popup");
       window.location.href = "/parentportal";
     }
 
-    if (isCookieSet.status === 401) {
+    if (authStatus === 401) {
       popup.innerHTML = "Error: Not Authorized!";
       popup.style.backgroundColor = "lightcoral";
       popup.classList.add("popup");

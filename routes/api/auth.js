@@ -19,11 +19,13 @@ router.get("/", (req, res) => {
       cookies[cname] = value;
     });
 
-    if ("parentportal_password" in cookies) {
-      console.log("authorized");
-      res.json({ message: "Authorized!", status: 200 }); // if 'password' cookie was sent, user is 'authorized'
+    // check if password exists in cookies, and password is the magic password
+    if (
+      "parentportal_password" in cookies &&
+      cookies["parentportal_password"] === "HireMe123"
+    ) {
+      res.json({ message: "Authorized!", status: 200 });
     } else {
-      console.log("unauthorized");
       res.json({ message: "Error: Unauthorized!", status: 401 });
     }
   }
