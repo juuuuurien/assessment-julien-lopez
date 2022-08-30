@@ -4,13 +4,17 @@
 </div>
 </br>
 </br>
+<div align='center'>
 Hi! First and foremost, I would like to say thank you all so much for taking a chance on me!
 </br>
 I hope this project is a true representation of my skill as a developer. I tried to hit every mark on
 the prompt and worked very hard for it to look pretty, so please let me know how I did!
-
+<br />
+<br />
 Thank you,
+<br />
 Julien
+</div>
 
 ## Installing dependencies
 
