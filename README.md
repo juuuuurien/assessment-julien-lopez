@@ -35,8 +35,17 @@ The way I setup auth was to pass the password straight into a cookie, passing th
 <br />
 Obviously, in a real world app, I would probably use a jwt, or OAuth instead.
 <br />
+<br />
+The "/parentportal" route is also protected, so that unauthorized users cannot navigate to the page via editing the page url.
 
-    > To Sign in via the Modal. Enter: "HireMe123" into the text field.
+<br />
+
+<pre>
+<code>
+> To Sign in via the Modal. Enter: "<font size="4"><strong >HireMe123</strong></font>" into the text field.
+> Click the Parent Portal button
+</code>
+</pre>
 
 ## Testing the Database
 
